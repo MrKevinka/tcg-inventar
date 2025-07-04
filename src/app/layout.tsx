@@ -6,7 +6,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "One Piece Inventory",
+  title: "🌳 One Piece Inventory",
   description:
     "A starter project for Next.js with Tailwind CSS and TypeScript.",
 };

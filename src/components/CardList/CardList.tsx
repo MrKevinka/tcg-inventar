@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 import { useInventory } from "@/hooks/useInventory";
@@ -8,11 +9,31 @@ import cards2 from "../../../public/data/cards2.json";
 import Button from "../Button/Button";
 import { Card } from "../Card/Card";
 import { Collection } from "../Collection/Collection";
+import { Modal } from "../Modal/Modal";
 
 const CARDS_PER_PAGE = 121;
-
+type CardType = {
+  CardNum: string;
+  Name: string;
+  Img: string;
+  "Card Type": string;
+  Rarity: string;
+};
 export const CardList = () => {
   const { addCard, decreaseCard } = useInventory();
+  const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const openModal = (card: any) => {
+    console.log("Karte geklickt:", card);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    setSelectedCard(card);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setSelectedCard(null);
+    setIsModalOpen(false);
+  };
   //Search
   const [searchTerm, setSearchTerm] = useState("");
   const filteredCards = cards2.filter(
@@ -78,7 +99,12 @@ export const CardList = () => {
               key={card.Name + card.CardNum}
               className="flex flex-col justify-between rounded border p-4"
             >
-              <Card name={card.Name} img={card.Img} cardNum={card.CardNum} />
+              <Card
+                name={card.Name}
+                img={card.Img}
+                cardNum={card.CardNum}
+                onClick={() => openModal(card)}
+              />
               <div className="flex justify-center gap-2">
                 <Button
                   action={() => addCard(card.CardNum)}
@@ -114,6 +140,29 @@ export const CardList = () => {
           />
         </div>
       </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        {selectedCard && (
+          <div className="text-center">
+            <h2 className="text-xl font-bold mb-2">{selectedCard.Name}</h2>
+            <Image
+              src={selectedCard.Img}
+              alt={selectedCard.Name}
+              className="mx-auto max-w-full h-auto"
+              width={480}
+              height={670}
+            />
+            <p className="mt-2 text-gray-700">
+              ID: {selectedCard.CardNum.slice(1)}
+            </p>
+            <p className="text-sm text-gray-500">
+              Typ: {selectedCard["Card Type"]}
+            </p>
+            <p className="text-sm text-gray-500">
+              Rarity: {selectedCard.Rarity}
+            </p>
+          </div>
+        )}
+      </Modal>
       <Collection />
     </div>
   );
