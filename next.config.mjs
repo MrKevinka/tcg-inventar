@@ -6,7 +6,13 @@ const nextConfig = {
     dirs: ["."],
   },
   images: {
-    domains: ["en.onepiece-cardgame.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "en.onepiece-cardgame.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
 
