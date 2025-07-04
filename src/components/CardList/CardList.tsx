@@ -90,11 +90,6 @@ export const CardList = () => {
                   label={"-1"}
                   className={collectBtn}
                 />
-                <Button
-                  action={() => removeCard(card.CardNum)}
-                  label={"Entfernen"}
-                  className={collectBtn}
-                />
               </div>
             </div>
           ))}
