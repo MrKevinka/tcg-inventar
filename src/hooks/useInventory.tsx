@@ -18,6 +18,7 @@ interface InventoryContextType {
   addCard: (CardNum: string, quantity?: number) => void;
   decreaseCard: (CardNum: string) => void;
   removeCard: (CardNum: string) => void;
+  clearInventory: () => void;
 }
 
 const InventoryContext = createContext<InventoryContextType | undefined>(
@@ -44,6 +45,7 @@ export const InventoryProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("inventory", JSON.stringify(inventory));
   }, [inventory]);
 
+  //Karte hinzufügen
   const addCard = (CardNum: string, quantity: number = 1) => {
     setInventory((prev) => {
       const existing = prev.find((item) => item.CardNum === CardNum);
@@ -59,6 +61,7 @@ export const InventoryProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  //Karte verringern
   const decreaseCard = (CardNum: string) => {
     setInventory((prev) =>
       prev
@@ -71,13 +74,18 @@ export const InventoryProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  //Karte entfernen
   const removeCard = (CardNum: string) => {
     setInventory((prev) => prev.filter((item) => item.CardNum !== CardNum));
   };
 
+  //ALLE Karten entfernen
+  const clearInventory = () => {
+    setInventory([]);
+  };
   return (
     <InventoryContext.Provider
-      value={{ inventory, addCard, decreaseCard, removeCard }}
+      value={{ inventory, addCard, decreaseCard, removeCard, clearInventory }}
     >
       {children}
     </InventoryContext.Provider>
