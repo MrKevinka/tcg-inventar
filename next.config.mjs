@@ -5,6 +5,9 @@ const nextConfig = {
   eslint: {
     dirs: ['.'],
   },
+  images: {
+    domains: ['en.onepiece-cardgame.com'],
+  },
 };
 
 const withBundleAnalyzer = BundleAnalyzer({
