@@ -13,11 +13,17 @@ const CARDS_PER_PAGE = 121;
 
 export const CardList = () => {
   const { addCard, decreaseCard, removeCard } = useInventory();
-
+  //Search
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredCards = cards2.filter(
+    (card) =>
+      card.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      card.CardNum.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
   //Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(cards2.length / CARDS_PER_PAGE);
-  const paginatedCards = cards2.slice(
+  const totalPages = Math.ceil(filteredCards.length / CARDS_PER_PAGE);
+  const paginatedCards = filteredCards.slice(
     (currentPage - 1) * CARDS_PER_PAGE,
     currentPage * CARDS_PER_PAGE,
   );
@@ -31,7 +37,22 @@ export const CardList = () => {
   return (
     <div className="flex h-screen w-full flex-col justify-between">
       <div>
-        <h1 className="mb-6 text-3xl font-bold">Meine One Piece Karten</h1>
+        <h1 className="mb-6 text-3xl font-bold">One Piece Karten</h1>
+        <div className="flex flex-col mb-5">
+          <input
+            type="text"
+            placeholder="🔍 Suche nach Name oder Nummer..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1); // Zurück zur ersten Seite bei neuer Suche
+            }}
+            className="mb-4 rounded border px-4 py-2 md:w-1/2 bg-red "
+          />
+          <a className=" w-fit" href="#sammlung">
+            Meine Sammlung
+          </a>
+        </div>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
           {paginatedCards.map((card) => (
             <div
