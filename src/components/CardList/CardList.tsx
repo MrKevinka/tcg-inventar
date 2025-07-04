@@ -12,7 +12,7 @@ import { Collection } from "../Collection/Collection";
 const CARDS_PER_PAGE = 121;
 
 export const CardList = () => {
-  const { addCard, decreaseCard, removeCard } = useInventory();
+  const { addCard, decreaseCard } = useInventory();
   //Search
   const [searchTerm, setSearchTerm] = useState("");
   const filteredCards = cards2.filter(
@@ -38,7 +38,7 @@ export const CardList = () => {
     <div className="flex h-screen w-full flex-col justify-between">
       <div>
         <h1 className="mb-6 text-3xl font-bold">One Piece Karten</h1>
-        <div className="flex flex-col mb-5">
+        <div className="mb-5 flex flex-col">
           <input
             type="text"
             placeholder="🔍 Suche nach Name oder Nummer..."
@@ -47,13 +47,13 @@ export const CardList = () => {
               setSearchTerm(e.target.value);
               setCurrentPage(1); // Zurück zur ersten Seite bei neuer Suche
             }}
-            className="mb-4 rounded border px-4 py-2 md:w-1/2 bg-red "
+            className="bg-red mb-4 rounded border px-4 py-2 md:w-1/2"
           />
-          <a className=" w-fit" href="#sammlung">
+          <a className="w-fit" href="#sammlung">
             Meine Sammlung ↓
           </a>
         </div>
-        <div className="my-4 flex justify-center gap-4 items-center">
+        <div className="my-4 flex items-center justify-center gap-4">
           <Button
             action={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             label="⬅️ Zurück"
@@ -94,7 +94,7 @@ export const CardList = () => {
             </div>
           ))}
         </div>
-        <div className="my-4 flex justify-center gap-4 items-center">
+        <div className="my-4 flex items-center justify-center gap-4">
           <Button
             action={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             label="⬅️ Zurück"

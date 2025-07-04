@@ -32,19 +32,17 @@ export const Collection = () => {
         />
       )}
 
-      <ul className="ml-2 flex flex-col list-disc md:ml-28">
+      <ul className="ml-2 flex list-disc flex-col md:ml-28">
         {inventory.map((item) => {
           const card = cards2.find((c) => c.CardNum === item.CardNum);
           if (!card) return null;
           return (
-            <li key={item.CardNum} className="flex pb-2 items-center">
-              <span className="border-b">
-                {`${card.Name} - ${card.CardNum.slice(1)}: ${item.quantity}x`}
-              </span>
+            <li key={item.CardNum} className="flex items-center pb-2">
+              <span className="border-b">{`${card.Name} - ${card.CardNum.slice(1)}: ${item.quantity}x`}</span>
               <Button
                 label={"🗑️"}
                 action={() => removeCard(card.CardNum)}
-                className="border-2 rounded mx-4 p-0.5"
+                className="mx-4 rounded border-2 p-0.5"
               />
             </li>
           );
