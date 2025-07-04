@@ -1,11 +1,11 @@
 import React from "react";
 
-interface ButtonWithLabelProps {
+interface ButtonProps {
   label: string;
   action: () => void;
 }
 
-const ButtonWithLabel: React.FC<ButtonWithLabelProps> = ({ label, action }) => {
+export const Button: React.FC<ButtonProps> = ({ label, action }) => {
   return (
     <button
       onClick={action}
@@ -16,4 +16,4 @@ const ButtonWithLabel: React.FC<ButtonWithLabelProps> = ({ label, action }) => {
   );
 };
 
-export default ButtonWithLabel;
+export default Button;
