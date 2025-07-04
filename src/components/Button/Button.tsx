@@ -4,14 +4,17 @@ interface ButtonProps {
   label: string;
   action: () => void;
   className?: string;
+  disabled?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ label, action, className }) => {
+export const Button: React.FC<ButtonProps> = ({
+  label,
+  action,
+  className,
+  disabled,
+}) => {
   return (
-    <button
-      onClick={action}
-      className={`rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 ${className}`}
-    >
+    <button disabled={disabled} onClick={action} className={`${className}`}>
       {label}
     </button>
   );
