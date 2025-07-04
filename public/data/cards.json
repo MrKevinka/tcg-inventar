@@ -1,0 +1,26 @@
+[
+  {
+    "id": "OP01-001",
+    "name": "Zoro",
+    "image": "/cards/CardImages/OP01-001.jpg",
+    "type": "Leader",
+    "color": ["Red"],
+    "subType": ["Straw Hat", "Supernovas"]
+  },
+  {
+    "id": "OP01-002",
+    "name": "Trafalgar Law",
+    "image": "/cards/CardImages/OP01-002.jpg",
+    "type": "Leader",
+    "color": ["Red", "Green"],
+    "subType": ["Heart Pirates", "Supernovas"]
+  },
+  {
+    "id": "OP01-003",
+    "name": "Monkey D. Luffy",
+    "image": "/cards/CardImages/OP01-003.jpg",
+    "type": "Leader",
+    "color": ["Red", "Green"],
+    "subType": ["Straw Hat", "Supernovas"]
+  }
+]
