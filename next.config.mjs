@@ -1,17 +1,17 @@
-import BundleAnalyzer from '@next/bundle-analyzer';
+import BundleAnalyzer from "@next/bundle-analyzer";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    dirs: ['.'],
+    dirs: ["."],
   },
   images: {
-    domains: ['en.onepiece-cardgame.com'],
+    domains: ["en.onepiece-cardgame.com"],
   },
 };
 
 const withBundleAnalyzer = BundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === "true",
 });
 
 export default withBundleAnalyzer(nextConfig);
