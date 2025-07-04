@@ -50,8 +50,27 @@ export const CardList = () => {
             className="mb-4 rounded border px-4 py-2 md:w-1/2 bg-red "
           />
           <a className=" w-fit" href="#sammlung">
-            Meine Sammlung
+            Meine Sammlung ↓
           </a>
+        </div>
+        <div className="my-4 flex justify-center gap-4 items-center">
+          <Button
+            action={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            label="⬅️ Zurück"
+            className={pageBtn}
+          />
+
+          <span>
+            Seite {currentPage} von {totalPages}
+          </span>
+          <Button
+            className={pageBtn}
+            action={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            label="Weiter ➡️"
+            disabled={currentPage === totalPages}
+          />
         </div>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
           {paginatedCards.map((card) => (

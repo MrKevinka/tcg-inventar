@@ -9,7 +9,10 @@ export const Collection = () => {
   const { inventory, removeCard, clearInventory } = useInventory();
   return (
     <div className="pb-20">
-      <h2 className="mt-10 text-2xl font-semibold" id="sammlung">
+      <a href="#start" className="self-end">
+        Zum Start ↑
+      </a>
+      <h2 className="mt-2 text-2xl font-semibold" id="sammlung">
         🗃️ Meine Sammlung:
       </h2>
 
