@@ -2,20 +2,20 @@ name: Build and Test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   build:
     runs-on: ubuntu-latest-4cores-16gb
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up node using nvm
-      uses: actions/setup-node@v4
-      with:
-        node-version-file: '.nvmrc'
-        cache: 'yarn'
-    - run: yarn
-    - run: yarn test
-    - run: yarn build
+      - uses: actions/checkout@v4
+      - name: Set up node using nvm
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+      - run: yarn
+      - run: yarn test
+      - run: yarn build
