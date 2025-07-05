@@ -8,20 +8,24 @@ import Button from '../Button/Button';
 
 export const Collection = () => {
   const { inventory, removeCard, clearInventory } = useInventory();
+  const collectionBtn = 'my-4 rounded  px-4 py-2 text-white ';
   return (
     <div className="pb-20">
       <a href="#start" className="self-end">
         Zum Start ↑
       </a>
       <h2 className="mt-2 text-2xl font-semibold" id="sammlung">
-        🗃️ Meine Sammlung:
+        🗃️ Meine Sammlung:{' '}
+        {/* {inventory.map(item => {
+          item.quantity;
+        })} */}
       </h2>
 
       {inventory.length > 0 && (
-        <div>
+        <div className="flex gap-2">
           <Button
             label="🗑️ Alles entfernen"
-            className="my-4 rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+            className={`${collectionBtn} bg-red-600 hover:bg-red-700`}
             action={() => {
               const confirmed = window.confirm('⚠️ Bist du sicher, dass du deine gesamte Sammlung löschen möchtest?');
               if (confirmed) {
@@ -30,7 +34,11 @@ export const Collection = () => {
               }
             }}
           />
-          <Button label={'Copy to Clipboard'} action={copyInventoryToClipboard} />
+          <Button
+            label={'Copy to Clipboard'}
+            action={copyInventoryToClipboard}
+            className={`${collectionBtn} bg-green-600 hover:bg-green-700`}
+          />
         </div>
       )}
 

@@ -41,15 +41,33 @@ export const getFormattedInventoryText = (): string => {
   }
 };
 
-export const copyInventoryToClipboard = async (): Promise<void> => {
+export const copyInventoryToClipboard = (): void => {
   const text = getFormattedInventoryText();
-  if (!text) return;
+  if (!text) {
+    alert('Keine Karten zum Kopieren gefunden.');
+    return;
+  }
 
+  // Fallback: execCommand
   try {
-    await navigator.clipboard.writeText(text);
-    alert('Karten kopiert!');
-  } catch (e) {
-    console.error('Fehler beim Kopieren in die Zwischenablage:', e);
-    alert('Kopieren fehlgeschlagen.');
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'absolute';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const successful = document.execCommand('copy');
+    document.body.removeChild(textarea);
+
+    if (successful) {
+      alert('Karten kopiert ');
+    } else {
+      alert('Kopieren fehlgeschlagen.');
+    }
+  } catch (err) {
+    alert('Kopieren fehlgeschlagen (Fehler beim Fallback).');
+    console.error('Kopier-Fehler:', err);
   }
 };
