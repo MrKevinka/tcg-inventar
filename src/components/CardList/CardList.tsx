@@ -52,23 +52,9 @@ export const CardList = () => {
 
   return (
     <div className="flex h-screen w-full flex-col justify-between">
-      <div>
+      <div className="flex flex-col gap-4">
         <h1 className="mb-6 text-3xl font-bold">One Piece Karten</h1>
-        <div className="mb-5 flex flex-col">
-          <input
-            type="text"
-            placeholder="🔍 Suche nach Name oder Nummer..."
-            value={searchTerm}
-            onChange={e => {
-              setSearchTerm(e.target.value);
-              setCurrentPage(1); // Zurück zur ersten Seite bei neuer Suche
-            }}
-            className="bg-red mb-4 rounded border px-4 py-2 md:w-1/2"
-          />
-          <a className="w-fit" href="#sammlung">
-            Meine Sammlung ↓
-          </a>
-        </div>
+
         <div className="my-4 flex items-center justify-center gap-4">
           <Button action={() => setCurrentPage(prev => Math.max(prev - 1, 1))} label="⬅️ Zurück" className={pageBtn} />
 
@@ -82,6 +68,21 @@ export const CardList = () => {
             disabled={currentPage === totalPages}
           />
         </div>
+        <div className="mb-5 flex flex-col">
+          <input
+            type="text"
+            placeholder="🔍 Suche nach Name oder ID..."
+            value={searchTerm}
+            onChange={e => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1); // Zurück zur ersten Seite bei neuer Suche
+            }}
+            className="bg-red mb-4 rounded border px-4 py-2 md:w-1/2"
+          />
+          <a className="w-fit" href="#sammlung">
+            Meine Sammlung ↓
+          </a>
+        </div>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
           {paginatedCards.map(card => (
             <div key={card.Name + card.CardNum} className="flex flex-col justify-between rounded border p-4">
@@ -92,6 +93,18 @@ export const CardList = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div className="mb-5 flex flex-col">
+          <input
+            type="text"
+            placeholder="🔍 Suche nach Name oder ID..."
+            value={searchTerm}
+            onChange={e => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1); // Zurück zur ersten Seite bei neuer Suche
+            }}
+            className="bg-red mb-4 rounded border px-4 py-2 md:w-1/2"
+          />
         </div>
         <div className="my-4 flex items-center justify-center gap-4">
           <Button action={() => setCurrentPage(prev => Math.max(prev - 1, 1))} label="⬅️ Zurück" className={pageBtn} />
