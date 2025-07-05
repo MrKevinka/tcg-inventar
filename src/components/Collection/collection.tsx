@@ -9,16 +9,19 @@ import Button from '../Button/Button';
 export const Collection = () => {
   const { inventory, removeCard, clearInventory } = useInventory();
   const collectionBtn = 'my-4 rounded  px-4 py-2 text-white ';
+  const totalCards = inventory.reduce((sum, item) => sum + item.quantity, 0);
   return (
     <div className="pb-20">
       <a href="#start" className="self-end">
         Zum Start ↑
       </a>
       <h2 className="mt-2 text-2xl font-semibold" id="sammlung">
-        🗃️ Meine Sammlung:{' '}
-        {/* {inventory.map(item => {
-          item.quantity;
-        })} */}
+        🗃️ Meine Sammlung:{/* 👇 Gesamtanzahl anzeigen */}
+        {inventory.length > 0 && (
+          <h3 className="mb-4 text-lg font-medium">
+            📦 Insgesamt {totalCards} Karte{totalCards === 1 ? '' : 'n'}
+          </h3>
+        )}
       </h2>
 
       {inventory.length > 0 && (
