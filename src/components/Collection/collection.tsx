@@ -1,6 +1,7 @@
 'use client';
 
 import { useInventory } from '@/hooks/useInventory';
+import { copyInventoryToClipboard } from '@/utils/inventoryUtils';
 
 import cards2 from '../../../public/data/cards2.json';
 import Button from '../Button/Button';
@@ -17,17 +18,20 @@ export const Collection = () => {
       </h2>
 
       {inventory.length > 0 && (
-        <Button
-          label="🗑️ Alles entfernen"
-          className="my-4 rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
-          action={() => {
-            const confirmed = window.confirm('⚠️ Bist du sicher, dass du deine gesamte Sammlung löschen möchtest?');
-            if (confirmed) {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-              clearInventory();
-            }
-          }}
-        />
+        <div>
+          <Button
+            label="🗑️ Alles entfernen"
+            className="my-4 rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+            action={() => {
+              const confirmed = window.confirm('⚠️ Bist du sicher, dass du deine gesamte Sammlung löschen möchtest?');
+              if (confirmed) {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+                clearInventory();
+              }
+            }}
+          />
+          <Button label={'Copy to Clipboard'} action={copyInventoryToClipboard} />
+        </div>
       )}
 
       <ul className="ml-2 flex list-disc flex-col md:ml-28">
