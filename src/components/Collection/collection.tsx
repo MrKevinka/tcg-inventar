@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useInventory } from "@/hooks/useInventory";
+import { useInventory } from '@/hooks/useInventory';
 
-import cards2 from "../../../public/data/cards2.json";
-import Button from "../Button/Button";
+import cards2 from '../../../public/data/cards2.json';
+import Button from '../Button/Button';
 
 export const Collection = () => {
   const { inventory, removeCard, clearInventory } = useInventory();
@@ -21,9 +21,7 @@ export const Collection = () => {
           label="🗑️ Alles entfernen"
           className="my-4 rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
           action={() => {
-            const confirmed = window.confirm(
-              "⚠️ Bist du sicher, dass du deine gesamte Sammlung löschen möchtest?",
-            );
+            const confirmed = window.confirm('⚠️ Bist du sicher, dass du deine gesamte Sammlung löschen möchtest?');
             if (confirmed) {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-call
               clearInventory();
@@ -33,17 +31,13 @@ export const Collection = () => {
       )}
 
       <ul className="ml-2 flex list-disc flex-col md:ml-28">
-        {inventory.map((item) => {
-          const card = cards2.find((c) => c.CardNum === item.CardNum);
+        {inventory.map(item => {
+          const card = cards2.find(c => c.CardNum === item.CardNum);
           if (!card) return null;
           return (
             <li key={item.CardNum} className="flex items-center pb-2">
               <span className="border-b">{`${card.Name} - ${card.CardNum.slice(1)}: ${item.quantity}x`}</span>
-              <Button
-                label={"🗑️"}
-                action={() => removeCard(card.CardNum)}
-                className="mx-4 rounded border-2 p-0.5"
-              />
+              <Button label={'🗑️'} action={() => removeCard(card.CardNum)} className="mx-4 rounded border-2 p-0.5" />
             </li>
           );
         })}

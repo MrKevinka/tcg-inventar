@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useState } from "react";
+import Image from 'next/image';
+import { useState } from 'react';
 
-import { useInventory } from "@/hooks/useInventory";
+import { useInventory } from '@/hooks/useInventory';
 
-import cards2 from "../../../public/data/cards2.json";
-import Button from "../Button/Button";
-import { Card } from "../Card/Card";
-import { Collection } from "../Collection/Collection";
-import { Modal } from "../Modal/Modal";
+import cards2 from '../../../public/data/cards2.json';
+import Button from '../Button/Button';
+import { Card } from '../Card/Card';
+import { Collection } from '../Collection/Collection';
+import { Modal } from '../Modal/Modal';
 
 const CARDS_PER_PAGE = 121;
 type CardType = {
   CardNum: string;
   Name: string;
   Img: string;
-  "Card Type": string;
+  'Card Type': string;
   Rarity: string;
 };
 export const CardList = () => {
@@ -25,7 +25,7 @@ export const CardList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const openModal = (card: any) => {
-    console.log("Karte geklickt:", card);
+    console.log('Karte geklickt:', card);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setSelectedCard(card);
     setIsModalOpen(true);
@@ -35,25 +35,20 @@ export const CardList = () => {
     setIsModalOpen(false);
   };
   //Search
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const filteredCards = cards2.filter(
-    (card) =>
+    card =>
       card.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       card.CardNum.toLowerCase().includes(searchTerm.toLowerCase()),
   );
   //Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(filteredCards.length / CARDS_PER_PAGE);
-  const paginatedCards = filteredCards.slice(
-    (currentPage - 1) * CARDS_PER_PAGE,
-    currentPage * CARDS_PER_PAGE,
-  );
+  const paginatedCards = filteredCards.slice((currentPage - 1) * CARDS_PER_PAGE, currentPage * CARDS_PER_PAGE);
 
   //Button-Styles
-  const pageBtn =
-    "rounded px-4 py-2 text-white bg-purple-500 hover:bg-purple-600";
-  const collectBtn =
-    "rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 ";
+  const pageBtn = 'rounded px-4 py-2 text-white bg-purple-500 hover:bg-purple-600';
+  const collectBtn = 'rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 ';
 
   return (
     <div className="flex h-screen w-full flex-col justify-between">
@@ -64,7 +59,7 @@ export const CardList = () => {
             type="text"
             placeholder="🔍 Suche nach Name oder Nummer..."
             value={searchTerm}
-            onChange={(e) => {
+            onChange={e => {
               setSearchTerm(e.target.value);
               setCurrentPage(1); // Zurück zur ersten Seite bei neuer Suche
             }}
@@ -75,66 +70,38 @@ export const CardList = () => {
           </a>
         </div>
         <div className="my-4 flex items-center justify-center gap-4">
-          <Button
-            action={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            label="⬅️ Zurück"
-            className={pageBtn}
-          />
+          <Button action={() => setCurrentPage(prev => Math.max(prev - 1, 1))} label="⬅️ Zurück" className={pageBtn} />
 
           <span>
             Seite {currentPage} von {totalPages}
           </span>
           <Button
             className={pageBtn}
-            action={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
+            action={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
             label="Weiter ➡️"
             disabled={currentPage === totalPages}
           />
         </div>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
-          {paginatedCards.map((card) => (
-            <div
-              key={card.Name + card.CardNum}
-              className="flex flex-col justify-between rounded border p-4"
-            >
-              <Card
-                name={card.Name}
-                img={card.Img}
-                cardNum={card.CardNum}
-                onClick={() => openModal(card)}
-              />
+          {paginatedCards.map(card => (
+            <div key={card.Name + card.CardNum} className="flex flex-col justify-between rounded border p-4">
+              <Card name={card.Name} img={card.Img} cardNum={card.CardNum} onClick={() => openModal(card)} />
               <div className="flex justify-center gap-2">
-                <Button
-                  action={() => addCard(card.CardNum)}
-                  label={"+1"}
-                  className={collectBtn}
-                />
-                <Button
-                  action={() => decreaseCard(card.CardNum)}
-                  label={"-1"}
-                  className={collectBtn}
-                />
+                <Button action={() => addCard(card.CardNum)} label={'+1'} className={collectBtn} />
+                <Button action={() => decreaseCard(card.CardNum)} label={'-1'} className={collectBtn} />
               </div>
             </div>
           ))}
         </div>
         <div className="my-4 flex items-center justify-center gap-4">
-          <Button
-            action={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            label="⬅️ Zurück"
-            className={pageBtn}
-          />
+          <Button action={() => setCurrentPage(prev => Math.max(prev - 1, 1))} label="⬅️ Zurück" className={pageBtn} />
 
           <span>
             Seite {currentPage} von {totalPages}
           </span>
           <Button
             className={pageBtn}
-            action={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
+            action={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
             label="Weiter ➡️"
             disabled={currentPage === totalPages}
           />
@@ -143,23 +110,17 @@ export const CardList = () => {
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         {selectedCard && (
           <div className="text-center">
-            <h2 className="text-xl font-bold mb-2">{selectedCard.Name}</h2>
+            <h2 className="mb-2 text-xl font-bold">{selectedCard.Name}</h2>
             <Image
               src={selectedCard.Img}
               alt={selectedCard.Name}
-              className="mx-auto max-w-full h-auto"
+              className="mx-auto h-auto max-w-full"
               width={480}
               height={670}
             />
-            <p className="mt-2 text-gray-700">
-              ID: {selectedCard.CardNum.slice(1)}
-            </p>
-            <p className="text-sm text-gray-500">
-              Typ: {selectedCard["Card Type"]}
-            </p>
-            <p className="text-sm text-gray-500">
-              Rarity: {selectedCard.Rarity}
-            </p>
+            <p className="mt-2 text-gray-700">ID: {selectedCard.CardNum.slice(1)}</p>
+            <p className="text-sm text-gray-500">Typ: {selectedCard['Card Type']}</p>
+            <p className="text-sm text-gray-500">Rarity: {selectedCard.Rarity}</p>
           </div>
         )}
       </Modal>

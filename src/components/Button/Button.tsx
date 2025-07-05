@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface ButtonProps {
   label: string;
@@ -7,12 +7,7 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({
-  label,
-  action,
-  className,
-  disabled,
-}) => {
+export const Button: React.FC<ButtonProps> = ({ label, action, className, disabled }) => {
   return (
     <button disabled={disabled} onClick={action} className={`${className}`}>
       {label}

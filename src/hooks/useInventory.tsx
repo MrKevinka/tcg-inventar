@@ -1,12 +1,6 @@
-"use client";
+'use client';
 
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 export interface InventoryItem {
   CardNum: string;
@@ -21,40 +15,43 @@ interface InventoryContextType {
   clearInventory: () => void;
 }
 
-const InventoryContext = createContext<InventoryContextType | undefined>(
-  undefined,
-);
+const InventoryContext = createContext<InventoryContextType | undefined>(undefined);
 
 export const InventoryProvider = ({ children }: { children: ReactNode }) => {
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("inventory");
+    if (typeof window === 'undefined') return; // check, dass es nur im browser funktioniert
+    const stored = localStorage.getItem('inventory');
     if (stored) {
       try {
         const parsedUnknown: unknown = JSON.parse(stored);
         const parsed = parsedUnknown as InventoryItem[];
         setInventory(parsed);
       } catch (e) {
-        console.error("Fehler beim Parsen des Inventars:", e);
+        console.error('Fehler beim Parsen des Inventars:', e);
       }
     }
   }, []);
 
+  // useEffect(() => {
+  //   localStorage.setItem('inventory', JSON.stringify(inventory));
+  // }, [inventory]);
+
   useEffect(() => {
-    localStorage.setItem("inventory", JSON.stringify(inventory));
+    try {
+      localStorage.setItem('inventory', JSON.stringify(inventory));
+    } catch (e) {
+      console.error('Fehler beim Speichern im localStorage:', e);
+    }
   }, [inventory]);
 
   //Karte hinzufügen
   const addCard = (CardNum: string, quantity: number = 1) => {
-    setInventory((prev) => {
-      const existing = prev.find((item) => item.CardNum === CardNum);
+    setInventory(prev => {
+      const existing = prev.find(item => item.CardNum === CardNum);
       if (existing) {
-        return prev.map((item) =>
-          item.CardNum === CardNum
-            ? { ...item, quantity: item.quantity + quantity }
-            : item,
-        );
+        return prev.map(item => (item.CardNum === CardNum ? { ...item, quantity: item.quantity + quantity } : item));
       } else {
         return [...prev, { CardNum, quantity }];
       }
@@ -63,20 +60,16 @@ export const InventoryProvider = ({ children }: { children: ReactNode }) => {
 
   //Karte verringern
   const decreaseCard = (CardNum: string) => {
-    setInventory((prev) =>
+    setInventory(prev =>
       prev
-        .map((item) =>
-          item.CardNum === CardNum
-            ? { ...item, quantity: item.quantity - 1 }
-            : item,
-        )
-        .filter((item) => item.quantity > 0),
+        .map(item => (item.CardNum === CardNum ? { ...item, quantity: item.quantity - 1 } : item))
+        .filter(item => item.quantity > 0),
     );
   };
 
   //Karte entfernen
   const removeCard = (CardNum: string) => {
-    setInventory((prev) => prev.filter((item) => item.CardNum !== CardNum));
+    setInventory(prev => prev.filter(item => item.CardNum !== CardNum));
   };
 
   //ALLE Karten entfernen
@@ -84,9 +77,7 @@ export const InventoryProvider = ({ children }: { children: ReactNode }) => {
     setInventory([]);
   };
   return (
-    <InventoryContext.Provider
-      value={{ inventory, addCard, decreaseCard, removeCard, clearInventory }}
-    >
+    <InventoryContext.Provider value={{ inventory, addCard, decreaseCard, removeCard, clearInventory }}>
       {children}
     </InventoryContext.Provider>
   );
@@ -95,9 +86,7 @@ export const InventoryProvider = ({ children }: { children: ReactNode }) => {
 export const useInventory = () => {
   const context = useContext(InventoryContext);
   if (!context) {
-    throw new Error(
-      "useInventory muss innerhalb von <InventoryProvider> verwendet werden.",
-    );
+    throw new Error('useInventory muss innerhalb von <InventoryProvider> verwendet werden.');
   }
   return context;
 };

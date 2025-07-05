@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { FC } from "react";
+import Image from 'next/image';
+import { FC } from 'react';
 
 interface CardProps {
   name: string;
@@ -10,12 +10,9 @@ interface CardProps {
 
 export const Card: FC<CardProps> = ({ name, img, onClick }) => {
   return (
-    <div
-      className="flex flex-col items-center justify-center cursor-pointer"
-      onClick={onClick}
-    >
+    <div className="flex cursor-pointer flex-col items-center justify-center" onClick={onClick}>
       <Image src={img} alt={name} width={200} height={250} />
-      <h2 className="font-semibold text-center">{name}</h2>
+      <h2 className="text-center font-semibold">{name}</h2>
     </div>
   );
 };

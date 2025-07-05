@@ -1,14 +1,15 @@
-import "./globals.css";
+import './globals.css';
 
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ["latin"] });
+import { InventoryProvider } from '@/hooks/useInventory';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "🌳 One Piece Inventory",
-  description:
-    "A starter project for Next.js with Tailwind CSS and TypeScript.",
+  title: '🌳 One Piece Inventory',
+  description: 'A starter project for Next.js with Tailwind CSS and TypeScript.',
 };
 
 export default function RootLayout({
@@ -18,7 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <InventoryProvider>{children}</InventoryProvider>
+      </body>
     </html>
   );
 }
