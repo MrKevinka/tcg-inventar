@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useInventory } from '@/hooks/useInventory';
 
@@ -26,19 +26,30 @@ export const CardList = () => {
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
-
   const [isLoading, setIsLoading] = useState(true);
 
-  // Wenn eine neue Karte ausgewählt wird, index auf 0 zurücksetzen
-  useEffect(() => {
-    setModalImageIndex(0);
-  }, [selectedCard]);
+  //Karten sortieren
+  const sortCardImages = (images: string[] | undefined, cardNum: string): string[] => {
+    if (!images) return [];
+
+    const cleanCardNum = cardNum.replace('#', '');
+    const expectedMainImage = `https://en.onepiece-cardgame.com/images/cardlist/card/${cleanCardNum}.png?250509`;
+
+    // Wenn das erwartete Bild enthalten ist, sortieren
+    if (images.includes(expectedMainImage)) {
+      return [expectedMainImage, ...images.filter(img => img !== expectedMainImage)];
+    }
+
+    return images;
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const openModal = (card: any) => {
-    console.log('Karte geklickt:', card);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    setSelectedCard(card);
+  const openModal = (card: CardType, imageIndex: number) => {
+    const sortedImages = sortCardImages(card.Images, card.CardNum);
+    // Wir erstellen eine neue Karte-Objekt-Kopie mit sortierten Bildern, um sie im Modal zu nutzen:
+    setSelectedCard({ ...card, Images: sortedImages });
+    setModalImageIndex(imageIndex);
+    setIsLoading(true);
     setIsModalOpen(true);
   };
   const closeModal = () => {
@@ -95,21 +106,26 @@ export const CardList = () => {
           </a>
         </div>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
-          {paginatedCards.map(card => (
-            <div key={card.Name + card.CardNum} className="flex flex-col justify-between rounded border p-4">
-              <Card
-                name={card.Name}
-                img={card.Img}
-                cardNum={card.CardNum}
-                images={card.Images}
-                onClick={() => openModal(card)}
-              />
-              <div className="flex justify-center gap-2">
-                <Button action={() => addCard(card.CardNum)} label={'+1'} className={collectBtn} />
-                <Button action={() => decreaseCard(card.CardNum)} label={'-1'} className={collectBtn} />
+          {paginatedCards.map(card => {
+            const sortedImages = sortCardImages(card.Images, card.CardNum);
+
+            return (
+              <div key={card.Name + card.CardNum} className="flex flex-col justify-between rounded border p-4">
+                <Card
+                  name={card.Name}
+                  img={sortedImages[0] || card.Img}
+                  cardNum={card.CardNum}
+                  images={sortedImages}
+                  onClick={index => openModal(card, index)} // Index richtig übergeben
+                />
+
+                <div className="flex justify-center gap-2">
+                  <Button action={() => addCard(card.CardNum)} label={'+1'} className={collectBtn} />
+                  <Button action={() => decreaseCard(card.CardNum)} label={'-1'} className={collectBtn} />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className="mb-5 flex flex-col">
           <input
@@ -161,7 +177,7 @@ export const CardList = () => {
                 alt={selectedCard.Name}
                 width={480}
                 height={550}
-                onLoadingComplete={() => setIsLoading(false)}
+                onLoad={() => setIsLoading(false)}
                 className={`mx-auto h-auto max-w-full rounded shadow transition-opacity duration-300 ${
                   isLoading ? 'opacity-0' : 'opacity-100'
                 }`}
@@ -174,8 +190,10 @@ export const CardList = () => {
                       key={index}
                       label=""
                       action={() => {
-                        setModalImageIndex(index);
-                        setIsLoading(true); // ← wichtig!
+                        if (index !== modalImageIndex) {
+                          setModalImageIndex(index);
+                          setIsLoading(true);
+                        }
                       }}
                       className={`h-3 w-3 rounded-full ${index === modalImageIndex ? 'bg-black' : 'bg-gray-300'}`}
                     />
