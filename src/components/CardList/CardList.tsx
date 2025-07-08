@@ -164,7 +164,21 @@ export const CardList = () => {
             <div className="relative h-auto max-w-full">
               {isLoading && (
                 <div className="absolute inset-0 z-10 flex items-center justify-center bg-white bg-opacity-80">
-                  <p className="text-lg font-medium text-gray-600">Bild wird geladen…</p>
+                  <div className="flex flex-col items-center justify-center">
+                    <svg
+                      className="h-10 w-10 animate-spin text-gray-700"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        d="M12 2v2m0 16v2m10-10h-2M4 12H2m16.24-7.76l-1.42 1.42M6.34 17.66l-1.42 1.42m0-13.08l1.42 1.42m11.32 11.32l1.42 1.42"
+                      />
+                    </svg>
+                    <p className="mt-2 text-sm text-gray-600">Bild wird geladen... 🏴‍☠️</p>
+                  </div>
                 </div>
               )}
 
