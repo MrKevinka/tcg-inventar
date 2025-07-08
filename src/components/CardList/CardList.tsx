@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useInventory } from '@/hooks/useInventory';
 
@@ -16,13 +16,24 @@ type CardType = {
   CardNum: string;
   Name: string;
   Img: string;
+  Images?: string[];
   'Card Type': string;
   Rarity: string;
 };
+
 export const CardList = () => {
   const { addCard, decreaseCard } = useInventory();
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImageIndex, setModalImageIndex] = useState(0);
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Wenn eine neue Karte ausgewählt wird, index auf 0 zurücksetzen
+  useEffect(() => {
+    setModalImageIndex(0);
+  }, [selectedCard]);
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const openModal = (card: any) => {
     console.log('Karte geklickt:', card);
@@ -86,7 +97,13 @@ export const CardList = () => {
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
           {paginatedCards.map(card => (
             <div key={card.Name + card.CardNum} className="flex flex-col justify-between rounded border p-4">
-              <Card name={card.Name} img={card.Img} cardNum={card.CardNum} onClick={() => openModal(card)} />
+              <Card
+                name={card.Name}
+                img={card.Img}
+                cardNum={card.CardNum}
+                images={card.Images}
+                onClick={() => openModal(card)}
+              />
               <div className="flex justify-center gap-2">
                 <Button action={() => addCard(card.CardNum)} label={'+1'} className={collectBtn} />
                 <Button action={() => decreaseCard(card.CardNum)} label={'-1'} className={collectBtn} />
@@ -120,23 +137,61 @@ export const CardList = () => {
           />
         </div>
       </div>
+
+      {/* Modal mit Bild-Slider per Dots */}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         {selectedCard && (
-          <div className="text-center">
+          <div className="h-auto w-auto text-center">
             <h2 className="mb-2 text-xl font-bold">{selectedCard.Name}</h2>
-            <Image
-              src={selectedCard.Img}
-              alt={selectedCard.Name}
-              className="mx-auto h-auto max-w-full"
-              width={480}
-              height={670}
-            />
-            <p className="mt-2 text-gray-700">ID: {selectedCard.CardNum.slice(1)}</p>
-            <p className="text-sm text-gray-500">Typ: {selectedCard['Card Type']}</p>
-            <p className="text-sm text-gray-500">Rarity: {selectedCard.Rarity}</p>
+
+            {/* Neuer Zustand für Laden */}
+            <div className="relative h-auto max-w-full">
+              {isLoading && (
+                <div className="absolute inset-0 z-10 flex items-center justify-center bg-white bg-opacity-80">
+                  <p className="text-lg font-medium text-gray-600">Bild wird geladen…</p>
+                </div>
+              )}
+
+              <Image
+                src={
+                  selectedCard.Images && selectedCard.Images.length > 0
+                    ? selectedCard.Images[modalImageIndex]
+                    : selectedCard.Img
+                }
+                alt={selectedCard.Name}
+                width={480}
+                height={550}
+                onLoadingComplete={() => setIsLoading(false)}
+                className={`mx-auto h-auto max-w-full rounded shadow transition-opacity duration-300 ${
+                  isLoading ? 'opacity-0' : 'opacity-100'
+                }`}
+              />
+
+              {selectedCard.Images && selectedCard.Images.length > 1 && (
+                <div className="mt-4 flex justify-center gap-2">
+                  {selectedCard.Images.map((_, index) => (
+                    <Button
+                      key={index}
+                      label=""
+                      action={() => {
+                        setModalImageIndex(index);
+                        setIsLoading(true); // ← wichtig!
+                      }}
+                      className={`h-3 w-3 rounded-full ${index === modalImageIndex ? 'bg-black' : 'bg-gray-300'}`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="mb-5">
+              <p className="mt-2 text-gray-700">ID: {selectedCard.CardNum.slice(1)}</p>
+              <p className="text-sm text-gray-500">Typ: {selectedCard['Card Type']}</p>
+              <p className="text-sm text-gray-500">Rarity: {selectedCard.Rarity}</p>
+            </div>
           </div>
         )}
       </Modal>
+
       <Collection />
     </div>
   );
