@@ -3,12 +3,13 @@
 import { useCardListState } from '@/hooks/useCardlistState';
 import { useInventory } from '@/hooks/useInventory';
 
-import CardListItem from '../CardListItem/CardListItem';
+import { CardFilters } from '../CardFilters/CardFilters';
+import { CardListItem } from '../CardListItem/CardListItem';
 import { Collection } from '../Collection/Collection';
 import { CardModalContent } from '../Modal/CardModalContent';
 import { Modal } from '../Modal/Modal';
 import { PaginationControls } from '../PaginationControls/PaginationControls';
-import SearchBar from '../Search/SearchBar';
+import { SearchBar } from '../SearchBar/SearchBar';
 
 export const CardList = () => {
   const {
@@ -26,6 +27,14 @@ export const CardList = () => {
     closeModal,
     paginatedCards,
     totalPages,
+    rarityFilter,
+    setRarityFilter,
+    typeFilter,
+    setTypeFilter,
+    setCategory,
+    setSetCategory,
+    setDetailFilter,
+    setSetDetailFilter,
   } = useCardListState();
 
   const { addCard, decreaseCard } = useInventory();
@@ -34,6 +43,16 @@ export const CardList = () => {
     <div className="flex h-screen w-full flex-col justify-between">
       <div className="flex flex-col gap-4">
         <h1 className="mb-6 text-3xl font-bold">One Piece Karten</h1>
+        <CardFilters
+          rarityFilter={rarityFilter}
+          setRarityFilter={setRarityFilter}
+          typeFilter={typeFilter}
+          setTypeFilter={setTypeFilter}
+          setCategory={setCategory}
+          setSetCategory={setSetCategory}
+          setDetailFilter={setDetailFilter}
+          setSetDetailFilter={setSetDetailFilter}
+        />
 
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} resetPage={() => setCurrentPage(1)} />
 

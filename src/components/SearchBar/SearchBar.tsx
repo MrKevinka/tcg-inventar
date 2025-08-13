@@ -8,7 +8,7 @@ type SearchBarProps = {
   resetPage: () => void;
 };
 
-const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, resetPage }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, resetPage }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     resetPage();
@@ -29,5 +29,3 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, resetP
     </div>
   );
 };
-
-export default SearchBar;
