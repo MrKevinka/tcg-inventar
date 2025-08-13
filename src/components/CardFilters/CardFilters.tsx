@@ -26,9 +26,10 @@ export const CardFilters: FC<Props> = ({
   setDetailFilter,
   setSetDetailFilter,
 }: Props) => {
+  const selectStyles = 'rounded-md bg-red-100 p-2';
   return (
     <div className="flex flex-wrap gap-4">
-      <select value={rarityFilter} onChange={e => setRarityFilter(e.target.value)}>
+      <select value={rarityFilter} onChange={e => setRarityFilter(e.target.value)} className={selectStyles}>
         <option value="">Alle Rarities</option>
         <option value="C">Character</option>
         <option value="R">Rare</option>
@@ -38,6 +39,7 @@ export const CardFilters: FC<Props> = ({
 
       <select
         value={typeFilter}
+        className={selectStyles}
         onChange={e => {
           const selectedType = e.target.value;
           setTypeFilter(selectedType);
@@ -56,6 +58,7 @@ export const CardFilters: FC<Props> = ({
       </select>
 
       <select
+        className={selectStyles}
         value={setCategory}
         onChange={e => {
           setSetCategory(e.target.value);
@@ -69,7 +72,7 @@ export const CardFilters: FC<Props> = ({
       </select>
 
       {(setCategory === 'SET' || setCategory === 'STARTER') && (
-        <select value={setDetailFilter} onChange={e => setSetDetailFilter(e.target.value)}>
+        <select value={setDetailFilter} onChange={e => setSetDetailFilter(e.target.value)} className={selectStyles}>
           <option value="">{setCategory === 'SET' ? 'Alle Sets' : 'Alle Starterdecks'}</option>
           {(setCategory === 'SET' ? setOptions : starterOptions).map(({ value, label }) => (
             <option key={value} value={value}>
