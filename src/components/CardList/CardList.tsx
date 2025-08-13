@@ -1,13 +1,9 @@
 'use client';
 
-import { clsx } from 'clsx';
-
 import { useCardListState } from '@/hooks/useCardlistState';
 import { useInventory } from '@/hooks/useInventory';
-import { buttonVariants } from '@/utils/buttonVariants';
 
-import Button from '../Button/Button';
-import { Card } from '../Card/Card';
+import CardListItem from '../CardListItem/CardListItem';
 import { Collection } from '../Collection/Collection';
 import { CardModalContent } from '../Modal/CardModalContent';
 import { Modal } from '../Modal/Modal';
@@ -50,23 +46,13 @@ export const CardList = () => {
 
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
           {paginatedCards.map(card => (
-            <div key={card.CardNum} className="flex flex-col justify-between rounded border p-4">
-              <Card
-                name={card.Name}
-                img={card.Images?.[0] || card.Img}
-                cardNum={card.CardNum}
-                images={card.Images}
-                onClick={index => openModal(card, index)}
-              />
-              <div className="flex justify-center gap-2">
-                <Button action={() => addCard(card.CardNum)} label="+1" className={clsx(buttonVariants.collection)} />
-                <Button
-                  action={() => decreaseCard(card.CardNum)}
-                  label="-1"
-                  className={clsx(buttonVariants.collection)}
-                />
-              </div>
-            </div>
+            <CardListItem
+              key={card.CardNum}
+              card={card}
+              openModal={openModal}
+              addCard={addCard}
+              decreaseCard={decreaseCard}
+            />
           ))}
         </div>
 
