@@ -3,7 +3,7 @@
 import { useInventory } from '@/hooks/useInventory';
 import { copyInventoryToClipboard } from '@/utils/inventoryUtils';
 
-import cards2 from '../../../public/data/cards2.json';
+import cards2 from '../../../public/data/cards2';
 import Button from '../Button/Button';
 
 export const Collection = () => {
