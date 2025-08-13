@@ -57,7 +57,7 @@ export const CardModalContent = ({ card, modalImageIndex, setModalImageIndex, is
       </div>
       <div className="mb-5">
         <p className="mt-2 text-gray-700">ID: {CardNum.slice(1)}</p>
-        <p className="text-sm text-gray-500">Typ: {card['Card Type']}</p>
+        <p className="text-sm text-gray-500">Typ: {card.CardType}</p>
         <p className="text-sm text-gray-500">Rarity: {Rarity}</p>
       </div>
     </div>
