@@ -1,3 +1,5 @@
+import { clsx } from 'clsx';
+
 import { buttonVariants } from '@/utils/buttonVariants';
 
 import Button from '../Button/Button';
@@ -21,7 +23,7 @@ export const PaginationControls = ({ currentPage, totalPages, onPrev, onNext, cl
         action={onNext}
         label="Weiter ➡️"
         disabled={currentPage === totalPages}
-        className={buttonVariants.pagination}
+        className={clsx(buttonVariants.pagination)}
       />
     </div>
   );

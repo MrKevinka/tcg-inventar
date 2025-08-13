@@ -1,5 +1,7 @@
 'use client';
 
+import { clsx } from 'clsx';
+
 import { useCardListState } from '@/hooks/useCardlistState';
 import { useInventory } from '@/hooks/useInventory';
 import { buttonVariants } from '@/utils/buttonVariants';
@@ -57,8 +59,12 @@ export const CardList = () => {
                 onClick={index => openModal(card, index)}
               />
               <div className="flex justify-center gap-2">
-                <Button action={() => addCard(card.CardNum)} label="+1" className={buttonVariants.collection} />
-                <Button action={() => decreaseCard(card.CardNum)} label="-1" className={buttonVariants.collection} />
+                <Button action={() => addCard(card.CardNum)} label="+1" className={clsx(buttonVariants.collection)} />
+                <Button
+                  action={() => decreaseCard(card.CardNum)}
+                  label="-1"
+                  className={clsx(buttonVariants.collection)}
+                />
               </div>
             </div>
           ))}
