@@ -3,6 +3,6 @@ export type CardType = {
   Name: string;
   Img: string;
   Images?: string[];
-  'Card Type': string;
+  CardType: string;
   Rarity: string;
 };

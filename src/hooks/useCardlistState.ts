@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { CardType } from '@/types/CardType';
 import { sortCardImages } from '@/utils/sortCardImage';
 
-import { cards2 } from '../../public/data/cards2';
+import { Cards } from '../../public/data/cards';
 
 const CARDS_PER_PAGE = 121;
 
@@ -15,7 +15,7 @@ export const useCardListState = () => {
   const [modalImageIndex, setModalImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  const filteredCards = cards2.filter(
+  const filteredCards = Cards.filter(
     card =>
       card.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       card.CardNum.toLowerCase().includes(searchTerm.toLowerCase()),
