@@ -26,7 +26,7 @@ export const CardFilters: FC<Props> = ({
   setDetailFilter,
   setSetDetailFilter,
 }: Props) => {
-  const selectStyles = 'rounded-md bg-red-100 p-2';
+  const selectStyles = 'rounded-md bg-red-100 p-3';
   return (
     <div className="flex flex-wrap gap-4">
       <select value={rarityFilter} onChange={e => setRarityFilter(e.target.value)} className={selectStyles}>

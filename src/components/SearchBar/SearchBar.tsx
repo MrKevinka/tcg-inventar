@@ -21,7 +21,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm,
         placeholder="🔍 Suche nach Name oder ID..."
         value={searchTerm}
         onChange={handleChange}
-        className="bg-red mb-4 rounded border px-4 py-2 md:w-1/2"
+        className="bg-red mb-4 rounded border px-5 py-2 md:w-1/2"
       />
       <a className="w-fit" href="#sammlung">
         Meine Sammlung ↓

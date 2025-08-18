@@ -3,6 +3,7 @@
 import { useCardListState } from '@/hooks/useCardlistState';
 import { useInventory } from '@/hooks/useInventory';
 
+import { Cards } from '../../../public/data/cards';
 import { CardFilters } from '../CardFilters/CardFilters';
 import { CardListItem } from '../CardListItem/CardListItem';
 import { Collection } from '../Collection/Collection';

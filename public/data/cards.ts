@@ -10692,7 +10692,10 @@ export const Cards = [
     CardType: 'CHARACTER',
     Name: 'Vinsmoke Sanji',
     Img: 'https://en.onepiece-cardgame.com/images/cardlist/card/OP10-063.png?250509',
-    Images: ['https://en.onepiece-cardgame.com/images/cardlist/card/OP10-063.png?250509'],
+    Images: [
+      'https://en.onepiece-cardgame.com/images/cardlist/card/OP10-063.png?250509',
+      'https://en.onepiece-cardgame.com/images/cardlist/card/OP10-063_p1.png?250718',
+    ],
   },
   {
     CardNum: '#OP10-064',
