@@ -16,7 +16,7 @@ interface CardListItemProps {
 }
 
 export const CardListItem: React.FC<CardListItemProps> = ({ card, openModal, addCard, decreaseCard }) => {
-  const sortedImages = sortCardImages(card.Images, card.CardNum);
+  const sortedImages = sortCardImages(card.Images ?? [], card.CardNum);
 
   return (
     <div className="flex flex-col justify-between rounded border p-4">
@@ -27,7 +27,7 @@ export const CardListItem: React.FC<CardListItemProps> = ({ card, openModal, add
         images={sortedImages}
         onClick={index => openModal(card, index)}
       />
-      <div className="flex justify-center gap-2">
+      <div className="mt-2 flex justify-center gap-2">
         <Button action={() => addCard(card.CardNum)} label="+1" className={clsx(buttonVariants.collection)} />
         <Button action={() => decreaseCard(card.CardNum)} label="-1" className={clsx(buttonVariants.collection)} />
       </div>

@@ -43,6 +43,7 @@ export const CardList = () => {
     <div className="flex h-screen w-full flex-col justify-between">
       <div className="flex flex-col gap-4">
         <h1 className="mb-6 text-3xl font-bold">One Piece Karten</h1>
+
         <CardFilters
           rarityFilter={rarityFilter}
           setRarityFilter={setRarityFilter}
@@ -94,6 +95,7 @@ export const CardList = () => {
           />
         )}
       </Modal>
+
       <Collection />
     </div>
   );

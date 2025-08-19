@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
+import OnePieceCards from '@/data/OnePieceCards';
 import { CardType } from '@/types/CardType';
 import { sortCardImages } from '@/utils/sortCardImage';
-
-import { Cards } from '../data/cards';
 
 const CARDS_PER_PAGE = 121;
 
@@ -19,7 +18,7 @@ export const useCardListState = () => {
   const [modalImageIndex, setModalImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  const filteredCards = Cards.filter(card => {
+  const filteredCards = OnePieceCards.filter(card => {
     const nameLower = card.Name.toLowerCase();
     const cardNumUpper = card.CardNum.toUpperCase();
     const searchLower = searchTerm.toLowerCase();
