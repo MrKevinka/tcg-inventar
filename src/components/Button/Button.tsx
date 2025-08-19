@@ -18,5 +18,3 @@ export const Button: React.FC<ButtonProps> = ({ label, action, className, disabl
     </button>
   );
 };
-
-export default Button;

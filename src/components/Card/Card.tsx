@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { FC, useState } from 'react';
 
-import Button from '../Button/button';
+import { Button } from '../Button/Button';
 
 interface CardProps {
   name: string;
