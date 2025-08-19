@@ -2,7 +2,7 @@ import { clsx } from 'clsx';
 
 import { buttonVariants } from '@/utils/buttonVariants';
 
-import Button from '../Button/Button';
+import Button from '../Button/button';
 
 type Props = {
   currentPage: number;
