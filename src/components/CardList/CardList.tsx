@@ -5,11 +5,11 @@ import { useInventory } from '@/hooks/useInventory';
 
 import { CardFilters } from '../CardFilters/cardFilters';
 import { CardListItem } from '../CardListItem/cardListItem';
+import { Collection } from '../Collection/collection';
 import { CardModalContent } from '../Modal/cardModalContent';
 import { Modal } from '../Modal/modal';
 import { PaginationControls } from '../PaginationControls/paginationControls';
 import { SearchBar } from '../SearchBar/searchBar';
-import {Collection} from "../Collection/collection"
 
 export const CardList = () => {
   const {
@@ -100,4 +100,4 @@ export const CardList = () => {
   );
 };
 
-export default CardList
+export default CardList;
