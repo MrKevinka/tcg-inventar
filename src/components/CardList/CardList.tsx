@@ -3,8 +3,8 @@
 import { useCardListState } from '@/hooks/useCardlistState';
 import { useInventory } from '@/hooks/useInventory';
 
-import { CardFilters } from '../CardFilters/cardFilters';
-import { CardListItem } from '../CardListItem/cardListItem';
+import { CardFilters } from '../CardFilters/CardFilters';
+import { CardListItem } from '../CardListItem/CardListItem';
 import { Collection } from '../Collection/collection';
 import { CardModalContent } from '../Modal/cardModalContent';
 import { Modal } from '../Modal/modal';
