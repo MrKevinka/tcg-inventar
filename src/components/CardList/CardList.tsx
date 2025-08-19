@@ -9,7 +9,7 @@ import { CardModalContent } from '../Modal/CardModalContent';
 import { Modal } from '../Modal/Modal';
 import { PaginationControls } from '../PaginationControls/PaginationControls';
 import { SearchBar } from '../SearchBar/SearchBar';
-import { Collection } from '../Collection/Collection';
+import  Collection  from '../Collection/Collection';
 
 export const CardList = () => {
   const {
