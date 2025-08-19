@@ -1,7 +1,4 @@
-// 🛑 AUTO-GENERATED FILE. DO NOT EDIT.
-import {CardType} from "@/types/CardType";
-
-const OnePieceCards: CardType[] = [
+[
   {
     "CardNum": "#OP01-001",
     "CardSet": "-ROMANCE DAWN- [OP-01]",
@@ -45069,6 +45066,4 @@ const OnePieceCards: CardType[] = [
       "https://en.onepiece-cardgame.com/images/cardlist/card/P-092_p2.png?250509"
     ]
   }
-];
-
-export default OnePieceCards as CardType[];
+]

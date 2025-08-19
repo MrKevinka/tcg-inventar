@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-import OnePieceCards from '@/data/OnePieceCards';
+import OnePieceCards from "../../public/OnePieceCards.json"
 import { CardType } from '@/types/CardType';
 import { sortCardImages } from '@/utils/sortCardImage';
 
