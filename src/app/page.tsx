@@ -1,4 +1,4 @@
-import { CardList } from '@/components/CardList/CardList';
+import { CardList } from '@/components/CardList/cardList';
 
 export default function Home() {
   return (

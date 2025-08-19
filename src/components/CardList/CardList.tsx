@@ -3,13 +3,13 @@
 import { useCardListState } from '@/hooks/useCardlistState';
 import { useInventory } from '@/hooks/useInventory';
 
-import { CardFilters } from '../CardFilters/CardFilters';
-import { CardListItem } from '../CardListItem/CardListItem';
-import { CardModalContent } from '../Modal/CardModalContent';
-import { Modal } from '../Modal/Modal';
-import { PaginationControls } from '../PaginationControls/PaginationControls';
-import { SearchBar } from '../SearchBar/SearchBar';
-import {Collection} from "../Collection/Collection"
+import { CardFilters } from '../CardFilters/cardFilters';
+import { CardListItem } from '../CardListItem/cardListItem';
+import { CardModalContent } from '../Modal/cardModalContent';
+import { Modal } from '../Modal/modal';
+import { PaginationControls } from '../PaginationControls/paginationControls';
+import { SearchBar } from '../SearchBar/searchBar';
+import {Collection} from "../Collection/collection"
 
 export const CardList = () => {
   const {

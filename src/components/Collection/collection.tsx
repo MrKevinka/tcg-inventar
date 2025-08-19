@@ -4,7 +4,7 @@ import { useInventory } from '@/hooks/useInventory';
 import { copyInventoryToClipboard } from '@/utils/inventoryUtils';
 
 import cards2 from '../../../public/data/cards';
-import Button from '../Button/Button';
+import Button from '../Button/button';
 
 export const Collection = () => {
   const { inventory, removeCard, clearInventory } = useInventory();

@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { CardType } from '@/types/CardType';
 
-import Button from '../Button/Button';
+import Button from '../Button/button';
 
 type Props = {
   card: CardType;
