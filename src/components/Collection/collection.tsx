@@ -1,9 +1,9 @@
 'use client';
 
-import { useInventory } from 'hooks/useInventory';
-import { copyInventoryToClipboard } from 'utils/inventoryUtils';
+import { useInventory } from '@/hooks/useInventory';
+import { copyInventoryToClipboard } from '@/utils/inventoryUtils';
 
-import cards from '../../../public/data/cards';
+import cards2 from '../../../public/data/cards';
 import { Button } from '../Button/Button';
 
 export const Collection = () => {
@@ -47,7 +47,7 @@ export const Collection = () => {
 
       <ul className="ml-2 flex list-disc flex-col md:ml-28">
         {inventory.map(item => {
-          const card = cards.find(c => c.CardNum === item.CardNum);
+          const card = cards2.find(c => c.CardNum === item.CardNum);
           if (!card) return null;
           return (
             <li key={item.CardNum} className="flex items-center pb-2">
