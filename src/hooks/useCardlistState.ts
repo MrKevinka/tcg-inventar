@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { CardType } from '@/types/CardType';
 import { sortCardImages } from '@/utils/sortCardImage';
 
-import { Cards } from '../../public/data/cards';
+import { Cards } from '../data/cards';
 
 const CARDS_PER_PAGE = 121;
 
