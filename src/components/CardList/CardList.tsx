@@ -5,11 +5,11 @@ import { useInventory } from '@/hooks/useInventory';
 
 import { CardFilters } from '../CardFilters/CardFilters';
 import CardListItem from '../CardListItem/CardListItem';
-import { Collection } from '../Collection/collection';
-import { CardModalContent } from '../Modal/cardModalContent';
-import { Modal } from '../Modal/modal';
-import { PaginationControls } from '../PaginationControls/paginationControls';
-import { SearchBar } from '../SearchBar/searchBar';
+import { Collection } from '../Collection/Collection';
+import { CardModalContent } from '../Modal/CardModalContent';
+import { Modal } from '../Modal/Modal';
+import { PaginationControls } from '../PaginationControls/PaginationControls';
+import { SearchBar } from '../SearchBar/SearchBar';
 
 export const CardList = () => {
   const {
