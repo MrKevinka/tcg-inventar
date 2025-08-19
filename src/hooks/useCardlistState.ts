@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import OnePieceCards from "../../public/OnePieceCards.json"
+
 import { CardType } from '@/types/CardType';
 import { sortCardImages } from '@/utils/sortCardImage';
+
+import OnePieceCards from '../../public/OnePieceCards.json';
 
 const CARDS_PER_PAGE = 121;
 

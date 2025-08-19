@@ -2,9 +2,9 @@
 
 import { useInventory } from '@/hooks/useInventory';
 import { copyInventoryToClipboard } from '@/utils/inventoryUtils';
-import { Button } from '../Button/Button';
 
-import OnePieceCards from "../../../public/OnePieceCards.json"
+import OnePieceCards from '../../../public/OnePieceCards.json';
+import { Button } from '../Button/Button';
 
 export const Collection = () => {
   const { inventory, removeCard, clearInventory } = useInventory();
@@ -34,9 +34,7 @@ export const Collection = () => {
             label="🗑️ Alles entfernen"
             className={`${collectionBtn} bg-red-600 hover:bg-red-700`}
             action={() => {
-              const confirmed = window.confirm(
-                '⚠️ Bist du sicher, dass du deine gesamte Sammlung löschen möchtest?'
-              );
+              const confirmed = window.confirm('⚠️ Bist du sicher, dass du deine gesamte Sammlung löschen möchtest?');
               if (confirmed) {
                 clearInventory();
               }
@@ -57,14 +55,8 @@ export const Collection = () => {
 
           return (
             <li key={item.CardNum} className="flex items-center pb-2">
-              <span className="border-b">
-                {`${card.Name} – ${card.CardNum.replace('#', '')}: ${item.quantity}x`}
-              </span>
-              <Button
-                label="🗑️"
-                action={() => removeCard(card.CardNum)}
-                className="mx-4 rounded border-2 p-0.5"
-              />
+              <span className="border-b">{`${card.Name} – ${card.CardNum.replace('#', '')}: ${item.quantity}x`}</span>
+              <Button label="🗑️" action={() => removeCard(card.CardNum)} className="mx-4 rounded border-2 p-0.5" />
             </li>
           );
         })}
