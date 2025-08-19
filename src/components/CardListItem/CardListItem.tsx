@@ -6,7 +6,7 @@ import { buttonVariants } from '@/utils/buttonVariants';
 import { sortCardImages } from '@/utils/sortCardImage';
 
 import { Button } from '../Button/Button';
-import { Card } from '../Card/card';
+import { Card } from '../Card/Card';
 
 interface CardListItemProps {
   card: CardType;
