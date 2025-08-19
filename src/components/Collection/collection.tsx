@@ -6,7 +6,7 @@ import { copyInventoryToClipboard } from '@/utils/inventoryUtils';
 import cards2 from '../../../public/data/cards';
 import Button from '../Button/Button';
 
-export const Collection = () => {
+const Collection = () => {
   const { inventory, removeCard, clearInventory } = useInventory();
   const collectionBtn = 'my-4 rounded  px-4 py-2 text-white ';
   const totalCards = inventory.reduce((sum, item) => sum + item.quantity, 0);
