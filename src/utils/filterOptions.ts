@@ -15,6 +15,16 @@ export const setOptions = [
   { value: 'OP12', label: 'OP12' },
 ];
 
+export const extraSetOptions = [
+  { value: 'EB01', label: 'EB01' },
+  { value: 'EB02', label: 'EB02' },
+];
+
+export const premiumSetOptions = [
+  { value: 'PRB01', label: 'PRB01' },
+  { value: 'PRB02', label: 'PRB02' },
+];
+
 export const starterOptions = [
   { value: 'ST01', label: 'ST01' },
   { value: 'ST02', label: 'ST02' },
