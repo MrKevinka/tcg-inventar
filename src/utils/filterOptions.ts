@@ -41,4 +41,8 @@ export const starterOptions = [
   { value: 'ST22', label: 'ST22' },
   { value: 'ST23', label: 'ST23' },
   { value: 'ST24', label: 'ST24' },
+  { value: 'ST25', label: 'ST25' },
+  { value: 'ST26', label: 'ST26' },
+  { value: 'ST27', label: 'ST27' },
+  { value: 'ST28', label: 'ST28' },
 ];
